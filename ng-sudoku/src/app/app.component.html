@@ -1,0 +1,32 @@
+<mat-toolbar [color]="'primary'">
+  <div class="left">
+    <button mat-raised-button (click)="generate()">New game</button>
+  </div>
+
+  <div class="center">
+    <span>ngSudoku</span>
+  </div>
+
+  <div class="right">
+    <mat-select [(ngModel)]="difficulty" (ngModelChange)="generate()">
+      <mat-option [value]="'easy'">Easy</mat-option>
+      <mat-option [value]="'moderate'">Moderate</mat-option>
+      <mat-option [value]="'hard'">Hard</mat-option>
+      <mat-option [value]="'expert'">Expert</mat-option>
+    </mat-select>
+  </div>
+</mat-toolbar>
+
+<main>
+  <div *ngIf="!sudoku" class="spinner-container">
+    <mat-spinner></mat-spinner>
+    <h3>Generating a new game for you...</h3>
+  </div>
+
+  <ng-container *ngIf="sudoku">
+    <su-sudoku [sudoku]="sudoku" (finish)="onGameFinished()"></su-sudoku>
+
+    <p class="time">{{ elapsedTime | formatTime }}</p>
+  </ng-container>
+</main>
+

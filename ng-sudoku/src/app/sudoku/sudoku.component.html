@@ -1,0 +1,25 @@
+<su-grid [sudoku]="sudoku" [(activeField)]="activeField"></su-grid>
+
+<div class="options">
+  <button mat-raised-button (click)="erase()">
+    <mat-icon>clear</mat-icon>
+    Erase
+  </button>
+  <button mat-raised-button (click)="noteMode = !noteMode" [color]="noteMode ? 'primary' : undefined">
+    <mat-icon>note</mat-icon>
+    Notes
+  </button>
+  <button mat-raised-button (click)="hint()">
+    <mat-icon>help</mat-icon>
+    Hint
+  </button>
+</div>
+
+<div class="controls">
+  <button *ngFor="let button of numberButtons"
+          mat-button
+          [disabled]="button.disabled"
+          (click)="insertNumber(button.number)">
+    {{ button.number }}
+  </button>
+</div>
